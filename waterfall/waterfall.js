@@ -15,7 +15,7 @@ class WaterfallLayout {
   constructor(options) {
     this.imageList = options.imageList || []; // 图片列表
     this.container = options.container; // 容器元素
-    this.columnCount = options.columnCount || 4; // 列数，默认为3
+    this.columnCount = options.columnCount || 4; // 列数，默认为4
     this.loadingElement = options.loadingElement; // 加载提示元素
     this.onImageLoad = options.onImageLoad; // 图片加载完成回调
     this.gap = options.gap || 16; // 图片间距，默认16px
