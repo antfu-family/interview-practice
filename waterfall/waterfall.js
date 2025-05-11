@@ -23,7 +23,6 @@ class WaterfallLayout {
     // 内部状态
     this.columns = []; // 列容器
     this.columnHeights = []; // 列高度
-    this.observer = null; // 交叉观察器
     
     // 初始化
     this.init();
@@ -91,7 +90,7 @@ class WaterfallLayout {
     const promises = [];
 
     // 遍历图片列表
-    this.imageList.forEach((item, index) => {
+    this.imageList.forEach((item) => {
       promises.push(new Promise(resolve => {
         // 创建图片元素
         const imgEl = new Image();
@@ -177,11 +176,6 @@ class WaterfallLayout {
    * 销毁瀑布流实例，清理资源
    */
   destroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = null;
-    }
-    
     this.container.innerHTML = '';
     this.columns = [];
     this.columnHeights = [];
