@@ -42,7 +42,7 @@ class WaterfallLayout {
     this.generateColumns()
 
     // 加载图片
-    this.loadImages()
+    this.loadImages(this.imageList)
   }
 
   /**
@@ -86,11 +86,11 @@ class WaterfallLayout {
   /**
    * 加载图片
    */
-  loadImages() {
+  loadImages(list) {
     const promises = []
 
     // 遍历图片列表
-    this.imageList.forEach((item) => {
+    list.forEach((item) => {
       promises.push(new Promise((resolve) => {
         // 创建图片元素
         const imgEl = new Image()
@@ -160,7 +160,7 @@ class WaterfallLayout {
    */
   addImages(newImages) {
     this.imageList = [...this.imageList, ...newImages]
-    this.loadImages()
+    this.loadImages(newImages)
   }
 
   /**

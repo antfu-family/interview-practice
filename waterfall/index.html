@@ -203,7 +203,6 @@
       const decreaseColumnsBtn = document.getElementById('decreaseColumns');
       const columnCountDisplay = document.getElementById('columnCount');
       const loadingElement = document.getElementById('loading');
-      const scrollIndicator = document.getElementById('scrollIndicator');
       
       // 配置参数
       let columnCount = 4;
@@ -228,10 +227,7 @@
         columnCount: columnCount,
         loadingElement: loadingElement,
         gap: 16,
-        onImageLoad: (img, container) => {
-          // 图片加载完成回调
-          // console.log('图片加载完成', img.src);
-        }
+        onImageLoad: (img, container) => {}
       });
       
       // 增加列数按钮事件
