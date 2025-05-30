@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "types": ["vitest/globals"],
+    "allowJs": true,
     "strict": true,
     "declaration": true,
     "outDir": "dist",

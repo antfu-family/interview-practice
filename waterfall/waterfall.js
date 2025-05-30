@@ -1,7 +1,7 @@
 /**
  * 瀑布流布局类 - 可重用的瀑布流布局组件
  */
-class WaterfallLayout {
+export class WaterfallLayout {
   /**
    * 创建瀑布流布局
    * @param {object} options - 配置选项
@@ -18,7 +18,7 @@ class WaterfallLayout {
     this.columnCount = options.columnCount || 4 // 列数，默认为4
     this.loadingElement = options.loadingElement // 加载提示元素
     this.onImageLoad = options.onImageLoad // 图片加载完成回调
-    this.gap = options.gap || 16 // 图片间距，默认16px
+    this.gap = options.gap ?? 16 // 图片间距，默认16px
 
     // 内部状态
     this.columns = [] // 列容器
@@ -97,26 +97,7 @@ class WaterfallLayout {
 
         // 图片加载完成回调
         imgEl.onload = () => {
-          // 获取最矮的列
-          const minHeightIndex = this.findMinHeightColumnIndex()
-
-          // 创建图片容器
-          const imageItem = document.createElement('div')
-          imageItem.className = 'image-item'
-
-          // 计算图片在列中的高度（保持宽高比）
-          const columnWidth = this.container.clientWidth / this.columnCount - this.gap // 减去padding
-          const imgHeight = (columnWidth / imgEl.naturalWidth) * imgEl.naturalHeight
-
-          // 将图片添加到容器
-          imageItem.appendChild(imgEl)
-
-          // 将容器添加到最矮的列
-          this.columns[minHeightIndex].appendChild(imageItem)
-
-          // 更新列高度
-          this.columnHeights[minHeightIndex] += imgHeight + this.gap // 加上margin底部
-
+          this.mountImg(imgEl)
           resolve()
         }
 
@@ -135,6 +116,27 @@ class WaterfallLayout {
     Promise.all(promises).then(() => {
       this.hideLoading()
     })
+  }
+
+  mountImg(imgEl) {
+    // 获取最矮的列
+    const minHeightIndex = this.findMinHeightColumnIndex()
+
+    // 创建图片容器
+    const imageItem = document.createElement('div')
+    imageItem.className = 'image-item'
+    // 计算图片在列中的高度（保持宽高比）
+    const columnWidth = this.container.clientWidth / this.columnCount - this.gap // 减去padding
+    const imgHeight = (columnWidth / imgEl.naturalWidth) * imgEl.naturalHeight
+
+    // 将图片添加到容器
+    imageItem.appendChild(imgEl)
+
+    // 将容器添加到最矮的列
+    this.columns[minHeightIndex].appendChild(imageItem)
+
+    // 更新列高度
+    this.columnHeights[minHeightIndex] += imgHeight + this.gap // 加上margin底部
   }
 
   /**
