@@ -7,8 +7,6 @@ describe('waterfall', () => {
   beforeAll(() => {
     mockImage()
     mockCreateElement()
-
-
     oLoading = document.createElement('div')
   })
 
